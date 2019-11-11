@@ -17,12 +17,12 @@ public class Point {
         y = Y;
     }
 
-    public double getX(double X) {
+    public double getX() {
         return x;
     }
 
-    public double getY(double Y) {
-        return Y;
+    public double getY() {
+        return y;
     }
 
 

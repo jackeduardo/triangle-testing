@@ -72,10 +72,10 @@ public class Triangle {
         String[] triangle_types = {"Equilateral", "Isosceles", "Scalene", "Right"};
         StringBuilder result = new StringBuilder();
         ArrayList<String> triangle_type_tags = new ArrayList<String>();
-        if (a == b && b == c && a == c) {
+        if (a == b && b == c ) {
             triangle_type_tags.add(triangle_types[0]);
         }
-        if ((a == b || b == c || a == c) && !(a == b && b == c && a == c)) {
+        if ((a == b || b == c || a == c) && !(a == b && b == c )) {
             triangle_type_tags.add(triangle_types[1]);
         }
         if (a != b && b != c && a != c) {

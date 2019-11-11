@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cosc4353hw6</a> &gt; <a href="index.source.html" class="el_package">determine_triangle</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">package determine_triangle;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Triangle {
+    private double[] sides;
+    private double[] corners;
+
+<span class="fc" id="L11">    Triangle() {</span>
+<span class="fc" id="L12">    }</span>
+
+    public void set_sides(double[] Sides) {
+<span class="fc" id="L15">        this.sides = Sides;</span>
+<span class="fc" id="L16">    }</span>
+
+    public void set_corners(double[] Corners) {
+<span class="fc" id="L19">        this.corners = Corners;</span>
+<span class="fc" id="L20">    }</span>
+
+    public boolean Verify_sides() {
+<span class="fc" id="L23">        String[] sides_order = {&quot;First&quot;, &quot;Second&quot;, &quot;Third&quot;};</span>
+<span class="fc" id="L24">        boolean[] judge = {true, true, true};</span>
+<span class="fc" id="L25">        double a = sides[0], b = sides[1], c = sides[2];</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            if (sides[i] &lt;= 0) {</span>
+<span class="fc" id="L28">                System.out.println(&quot;The value of &quot; + sides_order[i] + &quot; side is not a positive real-number.&quot;);</span>
+<span class="fc" id="L29">                judge[i] = false;</span>
+            }
+        }
+<span class="fc bfc" id="L32" title="All 6 branches covered.">        if (judge[0] &amp;&amp; judge[1] &amp;&amp; judge[2])</span>
+<span class="fc bfc" id="L33" title="All 6 branches covered.">            if (!((a + b) &gt; c &amp;&amp; (a + c) &gt; b &amp;&amp; (b + c) &gt; a)) {</span>
+<span class="fc" id="L34">                System.out.println(&quot;Three side_lengths cannot determine a valid triangle.&quot;);</span>
+<span class="fc" id="L35">                judge[0] = false;</span>
+            }
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        for (boolean j : judge) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            if (!j) {</span>
+<span class="fc" id="L39">                return false;</span>
+            }
+        }
+<span class="fc" id="L42">        System.out.println(&quot;All sides are valid.&quot;);</span>
+<span class="fc" id="L43">        return true;</span>
+    }
+
+    public boolean Verify_corners() {
+<span class="fc" id="L47">        String[] corner_order = {&quot;First&quot;, &quot;Second&quot;, &quot;Third&quot;};</span>
+<span class="fc" id="L48">        boolean[] judge = {true, true, true};</span>
+<span class="fc" id="L49">        double c1 = corners[0], c2 = corners[1], c3 = corners[2];</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (corners[i] &lt;= 0) {</span>
+<span class="fc" id="L52">                System.out.println(&quot;The value of &quot; + corner_order[i] + &quot; corner is not a positive real-number.&quot;);</span>
+<span class="fc" id="L53">                judge[i] = false;</span>
+            }
+        }
+<span class="fc bfc" id="L56" title="All 6 branches covered.">        if (judge[0] &amp;&amp; judge[1] &amp;&amp; judge[2])</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (c1 + c2 + c3 != 180) {</span>
+<span class="fc" id="L58">                System.out.println(&quot;The sum of three corners is not 180 degrees, cannot determine a valid triangle.&quot;);</span>
+<span class="fc" id="L59">                judge[0] = false;</span>
+            }
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (boolean j : judge) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (!j) {</span>
+<span class="fc" id="L63">                return false;</span>
+            }
+        }
+<span class="fc" id="L66">        System.out.println(&quot;All corners are valid.&quot;);</span>
+<span class="fc" id="L67">        return true;</span>
+    }
+
+    public void determine() {
+<span class="fc" id="L71">        double a = sides[0], b = sides[1], c = sides[2];</span>
+<span class="fc" id="L72">        String[] triangle_types = {&quot;Equilateral&quot;, &quot;Isosceles&quot;, &quot;Scalene&quot;, &quot;Right&quot;};</span>
+<span class="fc" id="L73">        StringBuilder result = new StringBuilder();</span>
+<span class="fc" id="L74">        ArrayList&lt;String&gt; triangle_type_tags = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L75" title="All 4 branches covered.">        if (a == b &amp;&amp; b == c ) {</span>
+<span class="fc" id="L76">            triangle_type_tags.add(triangle_types[0]);</span>
+        }
+<span class="fc bfc" id="L78" title="All 10 branches covered.">        if ((a == b || b == c || a == c) &amp;&amp; !(a == b &amp;&amp; b == c )) {</span>
+<span class="fc" id="L79">            triangle_type_tags.add(triangle_types[1]);</span>
+        }
+<span class="fc bfc" id="L81" title="All 6 branches covered.">        if (a != b &amp;&amp; b != c &amp;&amp; a != c) {</span>
+<span class="fc" id="L82">            triangle_type_tags.add(triangle_types[2]);</span>
+        }
+<span class="fc bfc" id="L84" title="All 6 branches covered.">        if (a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a) {</span>
+<span class="fc" id="L85">            triangle_type_tags.add(triangle_types[3]);</span>
+        }
+<span class="fc" id="L87">        String[] triangle_type_tags_array = triangle_type_tags.toArray(new String[triangle_type_tags.size()]);</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (triangle_type_tags.size() &gt; 1) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            for (int i = 0; i &lt; triangle_type_tags.size(); i++)</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                if (i != triangle_type_tags.size() - 1)</span>
+<span class="fc" id="L91">                    result.append(triangle_type_tags_array[i]).append(&quot; and &quot;);</span>
+                else
+<span class="fc" id="L93">                    result.append(triangle_type_tags_array[i]);</span>
+        } else {
+<span class="fc" id="L95">            result.append(triangle_type_tags_array[0]);</span>
+        }
+<span class="fc" id="L97">        System.out.println(&quot;The triangle is &quot; + result + &quot;.&quot;);</span>
+
+<span class="fc" id="L99">    }</span>
+
+    public void getArea() {
+<span class="fc" id="L102">        double a = sides[0], b = sides[1], c = sides[2];</span>
+<span class="fc" id="L103">        double s = (a + b + c) / 2;</span>
+<span class="fc" id="L104">        double Area = Math.sqrt(s * (s - a) * (s - b) * (s - c));</span>
+<span class="fc" id="L105">        System.out.println(&quot;The area is the triangle is: &quot; + Area);</span>
+<span class="fc" id="L106">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

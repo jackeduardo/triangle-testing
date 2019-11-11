@@ -29,7 +29,6 @@ public class Main {
             third_corner = read_sides.nextDouble();
         } catch (InputMismatchException e) {
             System.out.println("Input is invalid，Program ended.");
-            System.exit(1);
             throw e;
         }
         System.out.println("First side is: " + first_side);
